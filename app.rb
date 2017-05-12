@@ -1,7 +1,8 @@
-require "bundler/setup"
-Bundler.require :default
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+require('bundler/setup')
+Bundler.require(:default)
 
-get "/" do
-  erb :index
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file}
+
+get('/') do
+  erb(:index)
 end
