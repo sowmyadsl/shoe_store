@@ -84,7 +84,8 @@ end
 
 post('/brands') do
   name = params.fetch('brand_name')
-  @brand = Brand.new(:name => name)
+  price = params.fetch('price')
+  @brand = Brand.new(:name => name, :price => price)
   if @brand.save()
     redirect('/brands')
   else
@@ -105,7 +106,8 @@ patch('/brands/:id/edit') do
     brand_id = params.fetch('id').to_i()
     @brand = Brand.find(brand_id)
     name = params.fetch('new_name')
-    if @brand.update(:name => name)
+    price = params.fetch('price')
+    if @brand.update(:name => name, :price => price)
       redirect('/brands/'.concat(@brand.id().to_s()))
     else
       erb(:brand_errors)
