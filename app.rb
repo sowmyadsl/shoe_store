@@ -7,4 +7,7 @@ get('/') do
   erb(:index)
 end
 
-get('/')
+get('/stores') do
+  @stores = Store.all()
+  erb(:stores)
+end
