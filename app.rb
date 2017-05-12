@@ -15,9 +15,16 @@ end
 post('/stores') do
   name = params.fetch('store_name')
   @store = Store.new(:name => name)
-  if @store.save
+  if @store.save()
     redirect('/stores')
   else
     erb(:store_errors)
   end
+end
+
+get('/stores/:id') do
+  @store = Store.find(params.fetch('id').to_i())
+  @store_brands = @store.brands()
+  @brands = Brand.all().-(@store_brands)
+  erb(:store)
 end
