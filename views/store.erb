@@ -28,3 +28,107 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <% if @store_brands.any? %>
+      <h3> Here are all the brands this store carrys </h3>
+      <ul class="brands-list">
+      <% @store_brands.each() do |brand| %>
+        <form action="/stores/<%= @store.id() %>/remove_brand" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="brand_id" value="<%= brand.id() %>">
+          <button class="btn btn-danger brand-btn "type="submit">X</button>
+        </form>
+        <li><%= brand.name() %></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <h3> This store doesn't carry any brands yet, add brands below </h3>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <div class="well bs-component">
+      <% if @brands.any? %>
+        <fieldset>
+          <legend>Here are all the available brands in the database</legend>
+          <form id="update_brands" class="form-horizontal" action="/stores/<%= @store.id() %>/edit" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="form_id" value="update_brands">
+            <div class="form-group">
+              <label for="new_name" class="col-lg-3 control-label">Select Brands </label>
+              <div class="col-lg-9">
+                <% @brands.each do |brand| %>
+                <input type="checkbox" name="brand_ids[]" value="<%= brand.id() %>"> <%= brand.name() %><br>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-9 col-lg-offset-3">
+                <button type="submit" class="btn btn-primary">Add Brand(s)</button>
+              </div>
+            </div>
+          </form>
+      <% else %>
+        <h3>There aren't any available brands</h3>
+      <% end %>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <h3>Create a new brand & add to store</h3>
+  </div>
+  <div class="col-lg-6">
+    <div class="well bs-component">
+      <form id="add_brand" class="form-horizontal" action="/stores/<%= @store.id() %>/edit" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="form_id" value="add_brand">
+        <fieldset>
+          <legend>Create new brand</legend>
+          <div class="form-group">
+            <label for="brand_name" class="col-lg-3 control-label">Brand Name</label>
+            <div class="col-lg-9">
+              <input type="text" class="form-control" name="brand_name" id="brand_name" placeholder="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+              <button type="submit" class="btn btn-primary">Add Brand</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <h3>Remove this store from the database</h3>
+  </div>
+  <div class="col-lg-6">
+    <div class="well bs-component">
+      <form class="form-horizontal" action="/stores/<%= @store.id() %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <fieldset>
+          <legend>Delete this store</legend>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Remove store</label>
+            <div class="col-lg-9">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row navigation-btns">
+  <div class="col-lg-6">
+    <a href="/"><button type="button" class="btn btn-success">Return to main page</button></a>
+  </div>
+  <div class="col-lg-6">
+    <a href="/brands"><button type="button" class="btn btn-success">Visit brands page</button></a>
+  </div>
+</div>
