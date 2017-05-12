@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170512163859) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
-    t.integer "rating"
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

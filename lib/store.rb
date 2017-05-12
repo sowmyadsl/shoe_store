@@ -1,6 +1,6 @@
 class Store < ActiveRecord::Base
   has_and_belongs_to_many(:brands)
-  validates(:name,{:presence => true, :length => {:maximum => 20}})
+  validates(:name,{:presence => true, :length => { maximum: 100}})
   before_save(:downcase_store_name, :capitalize_store_name)
 
   private

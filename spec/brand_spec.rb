@@ -10,10 +10,18 @@ describe Brand, type: :model do
     expect(test_brand.save()).to(eq(false))
   end
 
-  it('restricts the length of the name to 20 characters or less') do
-    test_brand = Brand.new({:name => "a".*(21)})
+  describe "#price" do
+    it "returns the brand's price" do
+      brand = Brand.create({:name => "Adidas", :price => 20})
+      expect(brand.price).to eq 20.00
+    end
+  end
+
+  it('restricts the length of the name to 100 characters or less') do
+    test_brand = Brand.new({:name => "a".*(101)})
     expect(test_brand.save()).to(eq(false))
   end
+
 
   it('capitalizes the name') do
     test_brand = Brand.create(:name => "bata")
