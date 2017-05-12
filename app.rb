@@ -81,3 +81,13 @@ get('/brands') do
   @brands = Brand.all()
   erb(:brands)
 end
+
+post('/brands') do
+  name = params.fetch('brand_name')
+  @brand = Brand.new(:name => name)
+  if @brand.save()
+    redirect('/brands')
+  else
+    erb(:brand_errors)
+  end
+end
