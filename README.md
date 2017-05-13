@@ -1,18 +1,38 @@
-# <!--PROJECT NAME HERE-->
+# Shoe Store
 
-<!--PROJECT DESCRIPTION HERE-->
+This site is designed for a shoe distributer to track shoe brands and stores.
 
 ### Prerequisites
 
 Web browser with ES6 compatibility
 Examples: Chrome, Safari
 
-Ruby <!--VERSION HERE-->
+Ruby 2.3.4
 Bundler
 
-### Installing
+### User Stories
 
-Installation is quick and easy! First you can open this link <!--HEROKU LINK HERE--> to see the webpage in action live online. Or you can clone this repository to your machine, navigate to the file path in your terminal, and run 'app.rb' by typing '$ruby app.rb'. If you chose to clone the repository, after you run 'app.rb' you will need to copy the localhost path into your web browser. The standard localhost for Sinatra is port 4567
+* As a user, I want to be able to add, update, delete and list shoe stores.
+* As a user, I want to be able to add and list new shoe brands. Shoe brands  should include price.
+* As a user, I want to be able to add shoe brands in the application (don't worry about updating, listing or destroying shoe brands).
+* As a user, I want to be able to add existing shoe brands to a store to show where they are sold.
+* As a user, I want to be able to associate the same brand of shoes with multiple stores.
+* As a user, I want to be able to see all of the brands a store sells on the individual store page.
+* As a user, I want store names and shoe brands to be saved with a capital letter no matter how I enter them.
+* As a user, I want the price to be in currency format even if I just inputted a number. (In other words, typing in 50 should be updated to $50.00.)
+* As a user, I do not want stores and/or shoe brands to be saved if I enter a blank name.
+* As a user, I want all stores and brands to be unique. There shouldn't be two entries in the database for Blundstone.
+* As a user, I want store and brand names to have a maximum of one hundred characters.
+
+##Setup/Installation Requirements
+
+* clone the git repository
+* navigate to the directory in your terminal
+* run the following commands to create the database and tables
+* rake db:create
+* rake db:migrate
+* ruby app.rb
+* Open localhost:4567 in chrome.
 
 ## Built With
 
@@ -24,15 +44,15 @@ Installation is quick and easy! First you can open this link <!--HEROKU LINK HER
 * ES6
 * Jquery https://jquery.com/
 
-## Authors
+## Author
 
-* <!--YOUR NAME HERE-->
+* Sowmya Dinavahi
 
 ## License
 
 MIT License
 
-Copyright (c) <!--YOUR NAME & YEAR HERE-->
+Copyright (c) Sowmya Dinavahi 2017
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,4 +71,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
