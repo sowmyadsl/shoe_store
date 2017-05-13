@@ -24,7 +24,7 @@ Bundler
 * As a user, I want all stores and brands to be unique. There shouldn't be two entries in the database for Blundstone.
 * As a user, I want store and brand names to have a maximum of one hundred characters.
 
-##Setup/Installation Requirements
+## Setup/Installation Requirements
 
 * clone the git repository
 * navigate to the directory in your terminal
