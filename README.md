@@ -2,6 +2,8 @@
 
 This site is designed for a shoe distributer to track shoe brands and stores.
 
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=plastic)]
+
 ### Prerequisites
 
 Web browser with ES6 compatibility
