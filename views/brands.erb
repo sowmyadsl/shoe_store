@@ -2,35 +2,30 @@
   <div class="col-lg-6">
     <% if @brands.any? %>
     <h3>Here are the brands in the database</h3>
-      <ul>
-        <% @brands.each do |brand| %>
-          <li><a href="/brands/<%= brand.id() %>"><%= brand.name() %><%= brand.currency_format %></a></li>
-        <% end %>
-      </ul>
-    <% else %>
+    <table style="width:50%">
+      <tr>
+        <th><h4>Brand Name</h4></th>
+        <th><h4>Price</h4></th>
+      </tr>
+      <% @brands.each do |brand| %>
+      <tr>
+        <th><a href="/brands/<%= brand.id() %>"><%= brand.name() %></a></th>
+        <th><%= brand.currency_format %></th>
+      </tr>
+      <% end %>
+      <% else %>
       <h3>The database doesn't have any brands</h3>
-    <% end %>
-  </div>
-  <div class="col-lg-6">
-    <div class="well bs-component">
+      <% end %>
+    </div>
+    <div class="col-lg-6">
+      <div class ="well">
       <form class="form-horizontal" action="/brands" method="post">
         <fieldset>
-          <legend>Add a Brand Here</legend>
-          <div class="form-group">
-            <label for="brand_name" class="col-lg-3 control-label">Brand Name</label>
-            <div class="col-lg-9">
-              <input type="text" class="form-control" name="brand_name" id="brand_name" placeholder="name">
-              <label for="price">Brand Price:  $</label>
-              <input type="text" name="price">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-lg-9 col-lg-offset-3">
-              <button type="submit" class="btn btn-primary">Add Brand</button>
-            </div>
-          </div>
+          <legend>Add a Brand here:</legend>
+          <label for="brand_name">Brand Name:</label> <input type="text"class="form-control" name="brand_name" id="brand_name" placeholder="name"><br>
+          <label for="price">Brand Price:  $</label><input type="text" name="price"><br>
+          <button type="submit" class="btn btn-primary">Add Brand</button>
         </fieldset>
       </form>
     </div>
   </div>
-</div>

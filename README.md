@@ -29,9 +29,9 @@ Bundler
 * clone the git repository
 * navigate to the directory in your terminal
 * run the following commands to create the database and tables
-* rake db:create
-* rake db:migrate
-* ruby app.rb
+* `rake db:create`
+* `rake db:migrate`
+* `ruby app.rb`
 * Open localhost:4567 in chrome.
 
 ## Built With
