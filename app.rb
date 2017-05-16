@@ -133,6 +133,32 @@ patch('/stores/:id/edit') do
   end
 end
 
+patch('/brands/:id/edit') do
+  if params.fetch("form_id").==("update_name")
+    brand_id = params.fetch('id').to_i()
+    @brand = Brand.find(brand_id)
+    name = params.fetch('new_name')
+    if @brand.update(:name => name)
+      redirect('/brands/'.concat(@brand.id().to_s()))
+    else
+      erb(:brand_errors)
+    end
+  elsif params.fetch("form_id").==("update_stores")
+    @brand = Brand.find(params.fetch('id').to_i())
+    new_store_ids = params[:store_ids]
+    store_ids_array = []
+    @brand.stores().each() do |store|
+     store_ids_array.push(store.id())
+    end
+    new_store_ids.each() do |id|
+      store_ids_array.push(id)
+    end
+    @brand.update({:store_ids => store_ids_array})
+    redirect('/brands/'.concat(@brand.id().to_s()))
+    erb(:brand)
+  end
+end
+
 delete('/brands/:id') do
   brand_id = params.fetch('id').to_i()
   @brand = Brand.find(brand_id)
@@ -144,5 +170,5 @@ delete('/brands/:id/remove_store') do
   brand = Brand.find(params.fetch("id").to_i)
   store_id = params.fetch("store_id").to_i
   brand.stores.destroy(Store.find(store_id))
-  redirect('/brands/#{brand.id}')
+  redirect('/brands/'.concat(brand.id.to_s))
 end
