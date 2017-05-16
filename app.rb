@@ -29,13 +29,12 @@ get('/stores/:id') do
   erb(:store)
 end
 
-patch('/stores/:id/edit') do
+patch('/stores/:id') do
   if params.fetch("form_id").==("update_name")
     @store = Store.find(params.fetch('id').to_i())
     name = params.fetch('new_name')
     if @store.update(:name => name)
-      redirect('/stores/'.concat(@store.id().to_s()))
-      erb(:store)
+      redirect('/stores/#{@store.id}')
     else
       erb(:store_errors)
     end
@@ -50,14 +49,14 @@ patch('/stores/:id/edit') do
       brand_ids_array.push(id)
     end
     @store.update({:brand_ids => brand_ids_array})
-    redirect('/stores/'.concat(@store.id().to_s()))
+    rredirect('/stores/#{@store.id}')
     erb(:store)
   elsif params.fetch("form_id").==("add_brand")
     @store = Store.find(params.fetch("id").to_i())
     name = params.fetch('brand_name')
     @brand = @store.brands.new({:name => name})
     @store.brands.push(@brand)
-    redirect('/stores/'.concat(@store.id().to_s()))
+    redirect('/stores/#{@store.id}')
     erb(:store)
   end
 end
@@ -101,30 +100,36 @@ get('/brands/:id') do
 end
 
 
-patch('/brands/:id/edit') do
+patch('/stores/:id/edit') do
   if params.fetch("form_id").==("update_name")
-    brand_id = params.fetch('id').to_i()
-    @brand = Brand.find(brand_id)
+    @store = Store.find(params.fetch('id').to_i())
     name = params.fetch('new_name')
-    price = params.fetch('price')
-    if @brand.update(:name => name, :price => price)
-      redirect('/brands/'.concat(@brand.id().to_s()))
+    if @store.update(:name => name)
+      redirect('/stores/'.concat(@store.id().to_s()))
+      erb(:store)
     else
-      erb(:brand_errors)
+      erb(:store_errors)
     end
-  elsif params.fetch("form_id").==("update_stores")
-    @brand = Brand.find(params.fetch('id').to_i())
-    new_store_ids = params[:store_ids]
-    store_ids_array = []
-    @brand.stores().each() do |store|
-     store_ids_array.push(store.id())
+  elsif params.fetch("form_id").==("update_brands")
+    @store = Store.find(params.fetch('id').to_i())
+    new_brand_ids = params[:brand_ids]
+    brand_ids_array = []
+    @store.brands().each() do |brand|
+     brand_ids_array.push(brand.id())
     end
-    new_store_ids.each() do |id|
-      store_ids_array.push(id)
+    new_brand_ids.each() do |id|
+      brand_ids_array.push(id)
     end
-    @brand.update({:store_ids => store_ids_array})
-    redirect('/brands/'.concat(@brand.id().to_s()))
-    erb(:brand)
+    @store.update({:brand_ids => brand_ids_array})
+    redirect('/stores/'.concat(@store.id().to_s()))
+    erb(:store)
+  elsif params.fetch("form_id").==("add_brand")
+    @store = Store.find(params.fetch("id").to_i())
+    name = params.fetch('brand_name')
+    @brand = @store.brands.new({:name => name})
+    @store.brands.push(@brand)
+    redirect('/stores/'.concat(@store.id().to_s()))
+    erb(:store)
   end
 end
 
@@ -139,5 +144,5 @@ delete('/brands/:id/remove_store') do
   brand = Brand.find(params.fetch("id").to_i)
   store_id = params.fetch("store_id").to_i
   brand.stores.destroy(Store.find(store_id))
-  redirect('/brands/'.concat(brand.id.to_s))
+  redirect('/brands/#{brand.id}')
 end

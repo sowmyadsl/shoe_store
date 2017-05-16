@@ -4,13 +4,13 @@
     <h3> Here are the stores in the database </h3>
     <ul>
       <% @stores.each do |store| %>
-      <li> <a href="/stores/ <%= store.id() %>"><%=store.name() %></a></li>
+      <li> <a href="/stores/<%= store.id() %>"><%=store.name() %></a></li>
       <% end %>
     </ul>
     <% else %>
       <h3>The database doesn't have any stores</h3>
     <% end %>
-    
+
   </div>
   <div class ="col-lg-6">
     <div class="well bs-component">
