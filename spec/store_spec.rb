@@ -5,9 +5,15 @@ describe Store, type: :model do
 
   it { should have_and_belong_to_many :brands }
 
-  # it { should validate_presence_of(:name) }
+  it('restricts the length of the name to 100 characters or less') do
+    test_store = Store.new({:name => "a".*(101)})
+    expect(test_store.save()).to(eq(false))
+  end
 
-  it { should validate_length_of(:name)}
+  it('validate the presence of name') do
+    test_store = Store.new({:name => ""})
+    expect(test_store.save()).to(eq(false))
+  end
 
   it('downcases the name') do
     test_store = Store.create({:name => "joNNy"})
