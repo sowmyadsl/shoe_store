@@ -15,6 +15,12 @@ describe Store, type: :model do
     expect(test_store.save()).to(eq(false))
   end
 
+  it('validates the uniqueness of the name') do
+    test_store = Store.create({:name => "Portland"})
+    test_store2 = Store.create({:name => "portland"})
+    expect(test_store2.save).to eq false
+  end
+
   it('downcases the name') do
     test_store = Store.create({:name => "joNNy"})
     expect(test_store.name).to(eq("Jonny"))
